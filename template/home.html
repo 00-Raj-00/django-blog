@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blogs</title>
+    <style>
+        .head{
+        padding:20px;
+        margin-top: none;
+        color:white;
+        margin-bottom:0px;
+
+          border: #003e20  solid;
+          height: 40px;
+          background: #003e20;
+          text-align: center;
+          font-size: 40px;
+          width:100%;
+          position :fixed;
+          top: 0px;
+          left : 0px;
+          z-index:1000;
+
+            }
+
+
+        .body {
+          margin: 0px;
+         padding-top:150px;
+
+        }
+    .imgsize{
+    width : 100%;
+    height: auto;
+    display: flex;
+  justify-content: center;
+
+
+    }
+
+    a{
+     display: inline-block;
+     }
+
+
+     .di{
+     display: flex;
+     justify-content: center;
+     }
+
+     .d{
+
+
+       border:none;
+
+       width : 350px;
+       margin : auto;
+       margin-bottom: 50px;
+       margin-top: 50px;
+       background-color:white
+
+
+
+
+
+}
+
+ .d2{
+
+
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+
+ }
+
+
+
+
+    .par{
+
+        padding: 8px 12px;
+        color: black;
+        text-decoration: none;
+        font-size: 30px ;
+        text-align:center;
+        display : inline-block;
+
+
+    }
+    .par:hover{
+     text-decoration:underline;
+
+    }
+    .par:active{
+       text-decoration : underline red;
+    }
+
+   .p {
+   font-size: 30px ;
+   text-align:center;
+
+   }
+
+
+  .list{
+
+    background:#003e20;
+    color : white;
+    display: flex;
+   flex-direction: column-reverse;
+   position : fixed;
+   top: 80px;
+   left:0;
+   margin:0px;
+   font-family:arial;
+
+
+
+
+
+
+
+  }
+
+        .anc{
+        color: white;
+        padding-top: 30px;
+        left:0;
+        text-decoration:none;
+        font-style : none;
+        border:none;
+        background:none;
+
+
+
+        }
+  .d3{
+    width:100px;
+    height: 100%;
+    background:#003e20;
+   position : fixed;
+   top: 80px;
+   left:0;
+   margin:0px;
+   margin-top:0px;
+
+
+
+
+
+  }
+        .foot{
+
+         color: white;
+         padding:40px;
+         background:black;
+         margin:auto;
+         height:auto;
+         width:100%;
+         text-align:center;
+         bottom:0;
+         padding-top:0px;
+        }
+
+
+
+    </style>
+</head>
+<body class="body">
+<header class="head">
+    University Community Notice Board
+</header>
+
+
+
+{% for p in page %}
+<div class="d">
+<div class="d2">
+<div class="di" >
+{% if p.image %}
+
+
+<a href="content/{{p.id}}/">
+
+    <img src="{{ p.image.url }}"  class="imgsize" >
+</a>
+
+
+{% endif %}
+</div>
+<div class="p">
+<a href='content/{{p.id}}/' class="par">
+    <p >
+    {{ p.title }}
+    </p>
+</a>
+</div>
+
+
+<br>
+</div>
+</div>
+
+
+
+{% endfor %}
+<div class="d3">
+<ul class="list">
+    {% if user.is_authenticated %}
+
+<li><a href="publish" class="anc">publish</a></li>
+
+<li><a href="admin" class="anc">admin</a></li>
+<li><form method="post" action="/logout/">
+    {% csrf_token %}
+    <button type="submit" class="anc"> logout</button>
+</form></li>
+ <li><form method="post" action="/profile/">
+    {% csrf_token %}
+
+    <button type="submit" class="anc">profile</button>
+</form></li>
+    {% else %}
+
+<li><a href="register" class="anc">register</a></li>
+<li><a href="login" class="anc">login</a> </li>
+    {% endif %}
+</ul>
+
+</div>
+
+
+
+<footer class="foot">
+
+
+     <a href="?page=1" class="anc">  1  </a>
+
+    {% if page.has_previous %}
+     <a href="?page={{page.previous_page_number}}" class="anc">  previous {{page.previous_page_number}}  </a>
+    {% endif %}
+
+    {% if page.has_next %}
+     <a href="?page={{page.next_page_number}}" class="anc"> next {{page.next_page_number}}  </a>
+    {% endif %}
+
+    <a href="?page= {{page.paginator.num_pages}}" class="anc">  {{page.paginator.num_pages}}  </a>
+
+
+
+
+</footer>
+
+</body>
+</html>

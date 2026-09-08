@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>content</title>
+    <style>
+        .imsize{
+        width: 90%;
+        height: 80% ;
+        margin : auto;
+        margin-top:0px
+         padding-top:0px;
+         padding-left:25px;
+
+
+
+        }
+        p{
+         margin:0px;
+        }
+       .title{
+        text-align:center;
+        font-size:30px;
+        margin-top:0px;
+        padding-top:50px;
+        margin-bottom:0px;
+        padding-bottom:0px;
+
+       }
+        .intro{
+          padding-top:10px;
+          padding-bottom:10px;
+          text-align:justify;
+          font-size:20px;
+          font-weight:600;
+
+
+
+
+        }
+        .body{
+        text-align:justify;
+        font-family: arial;
+
+
+
+
+
+
+        }
+
+        .con{
+
+            margin-top: 7px;
+            text-align: left;
+            font-family:arial;
+            padding-top: 10px;
+            padding-bottom:10px;
+
+
+             }
+         .con2{
+            font-size:20px;
+            font-weight:600;
+
+
+
+         }
+
+
+        .author{
+           text-align: right;
+           font-style: italic;
+           font-weight: 600;
+           font-family: cursive;
+
+
+
+        }
+        .con3{
+            padding-left:100px;
+            padding-top: 4px;
+
+        }
+
+      .page{
+        margin : auto;
+        border : solid;
+        padding : 10px;
+        width : 800px;
+        height:auto;
+        padding-left:10px
+
+
+
+
+
+      }
+
+
+    </style>
+</head>
+<body>
+<div class="page">
+<div class="title">
+ <p>  {{c.title}}</p>
+    <br>
+</div>
+<div class="imsize">
+  {%  if c.image  %}
+    <img src="{{ c.image.url}}" class="imsize">
+
+    {% endif %}
+</div>
+<section class="intro">
+   <p> {{c.intro}}</p>
+</section>
+
+
+<article class="body">
+   <p> {{c.body}}</p>
+</article>
+
+{% if c.conc %}
+<article class="con">
+
+       <p class="con2">Conclusion : </p>
+            <p class="con3"> {{c.conc}}</p>
+
+
+
+</article>
+    {% endif %}<br>
+
+
+<div class="author" >
+ <p> <span class="author"> Author :-</span> {{c.author.username}}</p>
+ </div>
+<br>
+
+
+
+
+</div>
+
+</body>
+</html>

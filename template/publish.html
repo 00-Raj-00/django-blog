@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>publish</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ a.as_p }}
+   <p>author : {{ request.user.username }}</p>
+    <input type="submit">
+</form>
+
+
+</body>
+</html>

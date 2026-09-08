@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+    <style>
+
+        .pro{
+          border:solid 1px;
+          margin-top:4px;
+
+
+ p{
+    margin-left:5px;
+
+    }
+
+
+        .update{
+            border:none;
+            color:white;
+            background:green;
+            padding : 5px;
+            width:70px;
+            height:30px;
+            border-radius:4px;
+            margin-left:5px;
+
+
+
+
+
+    }
+.del{
+     margin-left:94%;
+      border:none;
+            color:white;
+            background:red;
+            padding : 5px;
+            width:70px;
+            height:30px;
+            border-radius:4px;
+
+
+
+
+
+}
+
+
+
+
+
+.body{
+   margin:0;
+
+   }
+
+
+    </style>
+</head>
+<body class="body">
+{% for a in article %}
+<div class="pro">
+
+<p>{{ a.title}} </p>
+<form method="get" action="update/{{a.id}}/">
+<button type="submit" class="update" >update</button>
+</form>
+<form method="post" action="/delete/">
+    {% csrf_token %}
+    <button type="submit" name="arti_id" value="{{a.id}}" class="del">delete</button>
+
+
+</form>
+</div>
+{% endfor %}
+
+
+
+</body>
+</html>
