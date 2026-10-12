@@ -10,7 +10,7 @@ from django.core.files.base import ContentFile
 from django.db import models
 
 from django.contrib.auth.models import User
-from django.db.transaction import commit
+
 
 
 # Create your models here.
@@ -49,6 +49,14 @@ class Article(models.Model):
             )
        super().save(*args,**kwargs)
 
+
+class Comment(models.Model):
+      comment = models.CharField(max_length=500,blank=True,null=True)
+      like  = models.IntegerField(blank=True,null=True)
+      dislike = models.IntegerField(blank=True,null=True)
+      viewer = models.ForeignKey(User,on_delete=models.CASCADE)
+      date = models.DateField(auto_now_add=True)
+      content = models.ForeignKey(Article,on_delete=models.CASCADE)
 
 
 

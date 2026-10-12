@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from rest_framework.exceptions import ValidationError
 
-from .models import Article
+from .models import Article,Comment
 
 from .forms import Register_form, Arti_form
 
@@ -90,3 +90,21 @@ def delete(request):
       del_arti = get_object_or_404(Article,id=delete_arti,author=request.user).delete()
 
     return redirect('profile')
+@login_required()
+def comment (request):
+    if request.method=='POST':
+        coment = request.POST.get('comment')
+        like = request.POST.get('like')
+        dislike = request.POST.get('dislike')
+        com = Comment(comment=coment,like=like,dislike=dislike)
+        com.save()
+    return redirect('content')
+
+def show_comment(request,con_id) :
+    coment = Comment.objects.filter(content=con_id).all().order_by('-date')
+    paginator = Paginator(coment,5)
+    page_num = request.GET.get('page')
+    page_comm = paginator.get_page(page_num)
+    return render(request,"content.html",{'comment':page_comm})
+
+
